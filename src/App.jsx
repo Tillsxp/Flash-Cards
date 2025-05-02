@@ -1,5 +1,6 @@
 import './App.css'
 import Card from './Card'
+import ListCards from './ListCards'
 
 function App() {
  
@@ -7,6 +8,7 @@ function App() {
   return (
     <>
      <Card/>
+     <ListCards/>
     </>
   )
 }
