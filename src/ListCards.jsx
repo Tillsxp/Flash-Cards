@@ -10,12 +10,12 @@ export default function ListCards() {
         
         const database = getDatabase(cong);
 
-        const collectionRef = ref(database, "your_collection");
+        const collectionRef = ref(database, "flash_cards");
 
             const fetchData = () => {
             onValue(collectionRef, (snapshot) => {
             const dataItem = snapshot.val();
-
+            console.log("Fetched Data:", dataItem);
 
             if (dataItem) {
 
@@ -25,7 +25,6 @@ export default function ListCards() {
     });
   };
 
-
   fetchData();
 }, []);
 
@@ -34,7 +33,11 @@ return (
     <h1>Data from database:</h1>
     <ul>
       {data.map((item, index) => (
-        <li key={index}>{item}</li>
+        <li key={index}>
+          <h4>{item.Term}</h4>
+          <p>{item.Definition}</p>
+          <img src={item.Photo}/>
+        </li>
       ))}
     </ul>
   </div>

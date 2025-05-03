@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-     <Card/>
+     {/* <Card/> Add flash card page*/}
      <ListCards/>
     </>
   )
