@@ -18,9 +18,7 @@ export default function ListCards() {
             console.log("Fetched Data:", dataItem);
 
             if (dataItem) {
-
-                const displayItem = Object.values(dataItem);
-                setData(displayItem);
+                setData([dataItem]);
       }
     });
   };
@@ -30,13 +28,14 @@ export default function ListCards() {
 
 return (
   <div>
-    <h1>Data from database:</h1>
     <ul>
       {data.map((item, index) => (
         <li key={index}>
           <h4>{item.Term}</h4>
           <p>{item.Definition}</p>
-          <img src={item.Photo}/>
+           {item.Photo && item.Photo.trim() !== "" && (
+            <img src={item.Photo} alt={item.Term || "Image"}/>
+           )}
         </li>
       ))}
     </ul>
