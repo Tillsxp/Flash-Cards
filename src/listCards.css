@@ -21,22 +21,20 @@ ul{
   
   .front,
   .back {
+    border-radius: 10px;
     position: absolute;
     width: 100%;
+    padding: 0px 20px 0px 20px;
     height: 100%;
     backface-visibility: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 18px;
+    background-color: #d8edff;
+    cursor: pointer;
   }
-  
-  .front {
-    background-color: #fff; 
-  }
-  
   .back {
-    background-color: #f0f0f0; 
     transform: rotateY(180deg); 
     display: flex;
     flex-direction: column;
