@@ -1,4 +1,3 @@
-import react from 'react';
 import './card.css';
 
 export default function Card (){
