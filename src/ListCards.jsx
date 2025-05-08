@@ -17,7 +17,8 @@ export default function ListCards() {
             
 
             if (dataItem) {
-                setData([dataItem]);
+              
+                setData(Object.values(dataItem));
       }
     });
   };
