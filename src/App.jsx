@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-    <div className='main-container'>
+    <div>
      {/* <Card/> Add flash card page*/}
      <ListCards/>
     </div>
