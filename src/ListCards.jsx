@@ -24,12 +24,12 @@ export default function ListCards() {
         const fetchData = () => {
             onValue(collectionRef, (snapshot) => {
             const dataItem = snapshot.val();
-            
+            console.log(dataItem);
 
             if (dataItem) {
-              
-                setData(Object.values(dataItem));
-      }
+              const entires = Object.entries(dataItem);
+                setData(entires);
+            }
     });
   };
 
@@ -48,6 +48,7 @@ return (
       <Slider {...settings}>
       {data.map((item, index) => (
         <div key={index}>
+          <h1>Flash Cards</h1>
             <div 
               className={`card ${flippedCards[item.Term] ? "flipped" : ""}`} 
               onClick={() => toggleFlip(item.Term)} >

@@ -55,14 +55,17 @@
   }
   
   img {
-    max-width: 100%;
-    max-height: 100%;
+    max-height:5rem;
+    min-height: 5rem;
   }
-  
+  h1{
+    text-align: center;
+    color: #fff;
+  }
 
 .slick-prev, .slick-next {
   position: absolute;
-  top: 43%;
+  top: 54%;
   transform: translateY(-50%);
   background-color: transparent; 
   z-index: 10;
@@ -81,7 +84,7 @@
 
 .slick-prev:before, .slick-next:before {
   font-size: 24px;
-  color: black; 
+  color: #fff; 
 }
 
 .slick-prev, .slick-next {
