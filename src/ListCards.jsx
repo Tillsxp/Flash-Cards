@@ -27,7 +27,8 @@ export default function ListCards() {
             console.log(dataItem);
 
             if (dataItem) {
-              const entires = Object.entries(dataItem);
+                const entires = Object.entries(dataItem);
+                console.log(entires);
                 setData(entires);
             }
     });
@@ -46,21 +47,21 @@ const toggleFlip = (term) => {
 return (
   <div>
       <Slider {...settings}>
-      {data.map((item, index) => (
+      {data.map(([key, value], index) => (
         <div key={index}>
           <h1>Flash Cards</h1>
             <div 
-              className={`card ${flippedCards[item.Term] ? "flipped" : ""}`} 
-              onClick={() => toggleFlip(item.Term)} >
+              className={`card ${flippedCards[value.Term] ? "flipped" : ""}`} 
+              onClick={() => toggleFlip(value.Term)} >
               <div className="outter-box">
                 <div className="front">
-                  <h4>{item.Term}</h4>
+                  <h4>{value.Term}</h4>
                 </div>
                 <div className="back">
                 <div className="inner-box">
-                    <p>{item.Definition}</p>
-                  {item.Photo && item.Photo.trim() !== "" && (
-                    <img src={`/assets/${item.Photo}`} alt={item.Term || "Image"}/>
+                    <p>{value.Definition}</p>
+                  {value.Photo && value.Photo.trim() !== "" && (
+                    <img src={`/assets/${value.Photo}`} alt={value.Term || "Image"}/>
                   )}
                 </div>
                 </div>
