@@ -1,6 +1,7 @@
-import AddCard from './AddCards'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AddCards from './AddCards'
 import ListCards from './ListCards'
+import './App.css'
 
 function App() {
  
@@ -8,9 +9,13 @@ function App() {
   return (
     <>
     <div>
-     {/* <Card/> Add flash card page*/}
-     <AddCard/>
-     <ListCards/>
+      <Router>
+        <Routes>
+          {/* <Card/> Add flash card page*/}
+          <Route path="/AddCards" element={<AddCards />} />
+          <Route path="/ListCards" element={<ListCards />} />
+        </Routes>
+      </Router>
     </div>
     </>
   )
