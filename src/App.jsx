@@ -1,5 +1,5 @@
+import AddCard from './AddCards'
 import './App.css'
-import Card from './Card'
 import ListCards from './ListCards'
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
     <>
     <div>
      {/* <Card/> Add flash card page*/}
+     <AddCard/>
      <ListCards/>
     </div>
     </>

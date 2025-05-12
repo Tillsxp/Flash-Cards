@@ -13,7 +13,7 @@ export default function ListCards() {
       slidesToShow: 1,
       slidesToScroll:1,
     };
-
+{/* Seperate Data into different component */}
     const [data, setData] = useState([]);
     const [flippedCards, setFlippedCards] = useState({});
 
