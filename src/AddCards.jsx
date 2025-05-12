@@ -1,19 +1,29 @@
 import './addCard.css';
 
 export default function AddCard() {
+
+
+    const handleAdd = (e) =>{
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+        console.log(data);
+       
+    }
+
     return(
         <>
-            <form>
-                <button className='add-button' type="submit">Add</button>
+            <form onSubmit={handleAdd}>
                 <div>
                     <label>Term:</label>
-                    <input type="text"/>
+                    <input type="text" name='term'/>
                 </div>
                 <div>
                     <label>Definition:</label>
-                    <input type="text"/>
+                    <input type="text" name='definition' />
                 </div>
                 <input type="file"/>
+                <input type='submit' value="add"/>
 
             </form>
         </>

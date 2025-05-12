@@ -24,11 +24,9 @@ export default function ListCards() {
         const fetchData = () => {
             onValue(collectionRef, (snapshot) => {
             const dataItem = snapshot.val();
-            console.log(dataItem);
 
             if (dataItem) {
                 const entires = Object.entries(dataItem);
-                console.log(entires);
                 setData(entires);
             }
     });
