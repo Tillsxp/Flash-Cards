@@ -1,14 +1,22 @@
-import './App.css'
-import Card from './Card'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AddCards from './AddCards'
 import ListCards from './ListCards'
+import './App.css'
 
 function App() {
  
 
   return (
     <>
-     {/* <Card/> Add flash card page*/}
-     <ListCards/>
+    <div>
+      <Router>
+        <Routes>
+          {/* <Card/> Add flash card page*/}
+          <Route path="/AddCards" element={<AddCards />} />
+          <Route path="/ListCards" element={<ListCards />} />
+        </Routes>
+      </Router>
+    </div>
     </>
   )
 }

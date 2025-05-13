@@ -13,7 +13,7 @@ export default function ListCards() {
       slidesToShow: 1,
       slidesToScroll:1,
     };
-
+{/* Seperate Data into different component */}
     const [data, setData] = useState([]);
     const [flippedCards, setFlippedCards] = useState({});
 
@@ -23,13 +23,12 @@ export default function ListCards() {
 
         const fetchData = () => {
             onValue(collectionRef, (snapshot) => {
-            const dataItem = snapshot.val();
-            
-
+            const dataItem = snapshot.val();  
+            console.log(dataItem);
             if (dataItem) {
-              
-                setData(Object.values(dataItem));
-      }
+                const entires = Object.entries(dataItem);
+                setData(entires);
+            }
     });
   };
 
@@ -46,20 +45,21 @@ const toggleFlip = (term) => {
 return (
   <div>
       <Slider {...settings}>
-      {data.map((item, index) => (
+      {data.map(([key, value], index) => (
         <div key={index}>
+          <h1>Flash Cards</h1>
             <div 
-              className={`card ${flippedCards[item.Term] ? "flipped" : ""}`} 
-              onClick={() => toggleFlip(item.Term)} >
+              className={`card ${flippedCards[value.Term] ? "flipped" : ""}`} 
+              onClick={() => toggleFlip(value.Term)} >
               <div className="outter-box">
                 <div className="front">
-                  <h4>{item.Term}</h4>
+                  <h4>{value.Term}</h4>
                 </div>
                 <div className="back">
                 <div className="inner-box">
-                    <p>{item.Definition}</p>
-                  {item.Photo && item.Photo.trim() !== "" && (
-                    <img src={`/assets/${item.Photo}`} alt={item.Term || "Image"}/>
+                    <p>{value.Definition}</p>
+                  {value.Photo && value.Photo.trim() !== "" && (
+                    <img src={`/assets/${value.Photo}`} alt={value.Term || "Image"}/>
                   )}
                 </div>
                 </div>

@@ -1,0 +1,13 @@
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: sans-serif;
+}
+.add-button{
+    border: none;
+    border-radius: 2px;
+    background-color: #51fe4c;
+    color: #fff;
+}
