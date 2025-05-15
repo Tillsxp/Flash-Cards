@@ -41,12 +41,12 @@ const toggleFlip = (term) => {
     [term]: !prevState[term],
   }));
 };
-
+console.log(data);
 return (
   <div>
       <Slider {...settings}>
-      {data.map(([key, value], index) => (
-        <div key={index}>
+      {data.map(([key, value]) => (
+        <div key={key}>
           <h1>Flash Cards</h1>
             <div 
               className={`card ${flippedCards[value.Term] ? "flipped" : ""}`} 
