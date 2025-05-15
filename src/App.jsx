@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route path="/AddCollection" element={<AddCollection/>}/>
           <Route path="/AddCards/:id" element={<AddCards />} />
-          <Route path="/" path={<CollectionView/>}/>
+          <Route path="/" element={<CollectionView/>}/>
           <Route path="/collection/:id" element={<CollectionView />}/>
         </Routes>
       </Router>
