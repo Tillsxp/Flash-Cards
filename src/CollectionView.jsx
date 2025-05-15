@@ -1,7 +1,7 @@
 import {useParams, Link} from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import cong from "./Configuration";
-import { ref, onValue } from "firebase/database";
+import { ref, onValue, off } from "firebase/database";
 import './listCards.css';
 import Slider from 'react-slick';
 
@@ -15,29 +15,30 @@ export default function CollectionView() {
 
     var settings = {
       dots: false,
-      infinite: true,
+      infinite: false,
       speed: 200,
       slidesToShow: 1,
       slidesToScroll:1,
     };
-{/* Seperate Data into different component */}
 
     useEffect(() => {
         
         const collectionRef = ref(cong, `flash_cards/Collection/${id}`);
 
-        const fetchData = () => {
-            onValue(collectionRef, (snapshot) => {
+        const unsubscribe = onValue(collectionRef, (snapshot) => {
             const dataItem = snapshot.val();  
-            console.log(dataItem);
             if (dataItem) {
-                const entires = Object.entries(dataItem);
-                setData(entires);
+                const entries = Object.entries(dataItem);
+                setData(entries);
+            }else {
+              setData([]);
             }
     });
-  };
 
-  fetchData();
+    return () => {
+      off(collectionRef, 'value', unsubscribe);
+    };
+
 }, [id]);
 
 const toggleFlip = (term) => {
@@ -46,17 +47,16 @@ const toggleFlip = (term) => {
     [term]: !prevState[term],
   }));
 };
-console.log(data);
 return (
   <div>
     <h1>{id} - Flash Cards</h1>
     <Link to={`/collection/${id}/AddCards`}>
       <button> Add Card</button>
     </Link>
+        <h1>Flash Cards</h1>
       <Slider {...settings}>
       {data.map(([key, value]) => (
         <div key={key}>
-          <h1>Flash Cards</h1>
             <div 
               className={`card ${flippedCards[value.Term] ? "flipped" : ""}`} 
               onClick={() => toggleFlip(value.Term)} >

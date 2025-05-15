@@ -13,7 +13,7 @@ export default function ListCollection(){
         onValue(collectionRef,(snapshot) => {
             const data = snapshot.val();
             if(data){
-                const entires = Object.entires(data);
+                const entires = Object.entries(data);
                 setCards(entires);
             }else{
                 setCards([]);

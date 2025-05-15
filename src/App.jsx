@@ -1,9 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AddCards from './AddCards'
 import CollectionView from './CollectionView'
-import './App.css'
-import ListCollection from './ListCollection';
 import AddCollection from './AddCollection';
+import './App.css'
 
 function App() {
  
