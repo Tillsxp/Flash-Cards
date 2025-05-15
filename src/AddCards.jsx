@@ -40,7 +40,6 @@ export default function AddCards() {
                     <label>Definition:</label>
                     <input type="text" name='definition' />
                 </div>
-                <input type="file"/>
                 <input type='submit' value="add"/>
 
             </form>
