@@ -1,10 +1,17 @@
+import {useParams, Link} from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import cong from "./Configuration";
 import { ref, onValue } from "firebase/database";
 import './listCards.css';
 import Slider from 'react-slick';
 
-export default function ListCards() {
+export default function CollectionView() {
+
+    const {id} = useParams()
+    const [data, setData] = useState([]);
+    const [flippedCards, setFlippedCards] = useState({});
+
+
 
     var settings = {
       dots: false,
@@ -14,12 +21,10 @@ export default function ListCards() {
       slidesToScroll:1,
     };
 {/* Seperate Data into different component */}
-    const [data, setData] = useState([]);
-    const [flippedCards, setFlippedCards] = useState({});
 
     useEffect(() => {
         
-        const collectionRef = ref(cong, "flash_cards");
+        const collectionRef = ref(cong, `flash_cards/Collection/${id}`);
 
         const fetchData = () => {
             onValue(collectionRef, (snapshot) => {
@@ -33,7 +38,7 @@ export default function ListCards() {
   };
 
   fetchData();
-}, []);
+}, [id]);
 
 const toggleFlip = (term) => {
   setFlippedCards((prevState) => ({
@@ -44,6 +49,10 @@ const toggleFlip = (term) => {
 console.log(data);
 return (
   <div>
+    <h1>{id} - Flash Cards</h1>
+    <Link to={`/collection/${id}/AddCards`}>
+      <button> Add Card</button>
+    </Link>
       <Slider {...settings}>
       {data.map(([key, value]) => (
         <div key={key}>
@@ -58,9 +67,6 @@ return (
                 <div className="back">
                 <div className="inner-box">
                     <p>{value.Definition}</p>
-                  {value.Photo && value.Photo.trim() !== "" && (
-                    <img src={`/assets/${value.Photo}`} alt={value.Term || "Image"}/>
-                  )}
                 </div>
                 </div>
               </div>
