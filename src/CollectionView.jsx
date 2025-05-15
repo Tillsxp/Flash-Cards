@@ -1,39 +1,45 @@
+import {useParams, Link} from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import cong from "./Configuration";
-import { ref, onValue } from "firebase/database";
+import { ref, onValue, off } from "firebase/database";
 import './listCards.css';
 import Slider from 'react-slick';
 
-export default function ListCards() {
+export default function CollectionView() {
+
+    const {id} = useParams()
+    const [data, setData] = useState([]);
+    const [flippedCards, setFlippedCards] = useState({});
+
+
 
     var settings = {
       dots: false,
-      infinite: true,
+      infinite: false,
       speed: 200,
       slidesToShow: 1,
       slidesToScroll:1,
     };
-{/* Seperate Data into different component */}
-    const [data, setData] = useState([]);
-    const [flippedCards, setFlippedCards] = useState({});
 
     useEffect(() => {
         
-        const collectionRef = ref(cong, "flash_cards");
+        const collectionRef = ref(cong, `flash_cards/Collection/${id}`);
 
-        const fetchData = () => {
-            onValue(collectionRef, (snapshot) => {
+        const unsubscribe = onValue(collectionRef, (snapshot) => {
             const dataItem = snapshot.val();  
-            console.log(dataItem);
             if (dataItem) {
-                const entires = Object.entries(dataItem);
-                setData(entires);
+                const entries = Object.entries(dataItem);
+                setData(entries);
+            }else {
+              setData([]);
             }
     });
-  };
 
-  fetchData();
-}, []);
+    return () => {
+      off(collectionRef, 'value', unsubscribe);
+    };
+
+}, [id]);
 
 const toggleFlip = (term) => {
   setFlippedCards((prevState) => ({
@@ -41,13 +47,16 @@ const toggleFlip = (term) => {
     [term]: !prevState[term],
   }));
 };
-
 return (
   <div>
+    <h1>{id} - Flash Cards</h1>
+    <Link to={`/collection/${id}/AddCards`}>
+      <button> Add Card</button>
+    </Link>
+        <h1>Flash Cards</h1>
       <Slider {...settings}>
-      {data.map(([key, value], index) => (
-        <div key={index}>
-          <h1>Flash Cards</h1>
+      {data.map(([key, value]) => (
+        <div key={key}>
             <div 
               className={`card ${flippedCards[value.Term] ? "flipped" : ""}`} 
               onClick={() => toggleFlip(value.Term)} >
@@ -58,9 +67,6 @@ return (
                 <div className="back">
                 <div className="inner-box">
                     <p>{value.Definition}</p>
-                  {value.Photo && value.Photo.trim() !== "" && (
-                    <img src={`/assets/${value.Photo}`} alt={value.Term || "Image"}/>
-                  )}
                 </div>
                 </div>
               </div>

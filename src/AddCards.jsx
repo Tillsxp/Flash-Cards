@@ -1,14 +1,15 @@
 import './addCard.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import cong from "./Configuration";
 import { ref ,push , set } from "firebase/database";
 
 export default function AddCards() {
 
     const navigate = useNavigate();
+    const {id} = useParams();
 
     function writeFlashCards(term, definition){
-        const cardRef = push(ref(cong, 'flash_cards/'));
+        const cardRef = push(ref(cong, `flash_cards/Collection/${id}`));
         set(cardRef, {
             Term: term,
             Definition: definition,
@@ -25,7 +26,7 @@ export default function AddCards() {
         writeFlashCards(data.term, data.definition);
         
         console.log(data);
-        navigate("/ListCards");
+        navigate(`/collection/${id}`);
     }
 
     return(
@@ -39,7 +40,6 @@ export default function AddCards() {
                     <label>Definition:</label>
                     <input type="text" name='definition' />
                 </div>
-                <input type="file"/>
                 <input type='submit' value="add"/>
 
             </form>
