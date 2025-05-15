@@ -1,5 +1,7 @@
 import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import {set, ref} from 'firebase/database';
+import cong from './Configuration';
 
 export default function AddCollection(){
     const [collectionName, setCollectionName] = useState();
