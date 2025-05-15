@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AddCards from './AddCards'
-import ListCards from './CollectionView'
+import CollectionView from './CollectionView'
 import './App.css'
 import ListCollection from './ListCollection';
+import AddCollection from './AddCollection';
 
 function App() {
  
@@ -12,9 +13,9 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route path="/" element={<ListCollection/>}/>
+          <Route path="/" element={<AddCollection/>}/>
           <Route path="/AddCards" element={<AddCards />} />
-          <Route path="/ListCards" element={<ListCards />} />
+          <Route path="/ListCards" element={<CollectionView />} />
         </Routes>
       </Router>
     </div>

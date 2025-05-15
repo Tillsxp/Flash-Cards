@@ -9,7 +9,7 @@ export default function AddCards() {
     const {id} = useParams();
 
     function writeFlashCards(term, definition){
-        const cardRef = push(ref(cong, 'flash_cards/'));
+        const cardRef = push(ref(cong, `flash_cards/Collection/${id}`));
         set(cardRef, {
             Term: term,
             Definition: definition,
